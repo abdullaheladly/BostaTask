@@ -114,8 +114,7 @@ class ProfileFragment : Fragment(),OnAlbumsClickListeners {
             profileViewModel.getUserAlbums(userId).observe(viewLifecycleOwner) {
                 when (it.status) {
                     ApiStatus.SUCCESS -> {
-                        Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT)
-                            .show()
+
                         it.data?.let { it1 -> albumsAdapter.saveData(it1) }
 
 

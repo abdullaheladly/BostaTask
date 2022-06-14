@@ -9,7 +9,7 @@ import com.abdullah996.bostatask.model.photos.PhotosResponseItem
 import com.abdullah996.bostatask.util.DiffUtilCallBack
 import com.squareup.picasso.Picasso
 
-class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.MyViewHolder>(){
+class PhotosAdapter(private val onPhotoClickListeners: OnPhotoClickListeners) : RecyclerView.Adapter<PhotosAdapter.MyViewHolder>(){
     private var currenciesList= emptyList<PhotosResponseItem>()
 
 
@@ -27,6 +27,9 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.MyViewHolder>(){
         with(holder){
             with(currenciesList[position]){
                 Picasso.get().load(thumbnailUrl).into(binding.albumPhoto)
+                binding.root.setOnClickListener {
+                    thumbnailUrl?.let { it1 -> onPhotoClickListeners.onPhotoItemClick(it1) }
+                }
             }
         }
 

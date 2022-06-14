@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
+class DetailsFragment : Fragment(),OnPhotoClickListeners {
 
     private var _binding: FragmentDetailsBinding?=null
     private val binding get() = _binding!!
@@ -32,7 +32,7 @@ class DetailsFragment : Fragment() {
     private val detailsViewModel:DetailsViewModel by viewModels()
 
 
-    private val photosAdapter by lazy { PhotosAdapter() }
+    private val photosAdapter by lazy { PhotosAdapter(this) }
 
     private val args by navArgs<DetailsFragmentArgs>()
     private var photosList= emptyList<PhotosResponseItem>()
@@ -116,6 +116,10 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    override fun onPhotoItemClick(imageUrl: String) {
+        ImageViewerDialog(imageUrl).show(childFragmentManager, "pp")
     }
 
 

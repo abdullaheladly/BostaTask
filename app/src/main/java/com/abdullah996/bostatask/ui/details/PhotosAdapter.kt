@@ -40,6 +40,9 @@ class PhotosAdapter(private val onPhotoClickListeners: OnPhotoClickListeners) : 
     }
 
     fun saveData(newActionsList:List<PhotosResponseItem>){
+        if (newActionsList.isNullOrEmpty()){
+            onPhotoClickListeners.onEmptyListPassed()
+        }
         val leadsListDiffUtil= DiffUtilCallBack(currenciesList,newActionsList)
         val diffUtilResult= DiffUtil.calculateDiff(leadsListDiffUtil)
         currenciesList=newActionsList

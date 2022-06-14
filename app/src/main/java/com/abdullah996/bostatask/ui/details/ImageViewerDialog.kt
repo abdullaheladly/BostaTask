@@ -2,7 +2,6 @@ package com.abdullah996.bostatask.ui.details
 
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -49,24 +48,23 @@ class ImageViewerDialog (
 
     private var _binding:DialogImageViewBinding?=null
     private val binding get() = _binding!!
-    private var imageBitmap:Bitmap?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding= DialogImageViewBinding.inflate(layoutInflater,container,false)
         Picasso.get().load(titleString).into(binding.myZoomImageView)
         binding.btnShare.setOnClickListener {
             val bitmapDrawable :BitmapDrawable = binding.myZoomImageView.drawable as BitmapDrawable
             val bitmap = bitmapDrawable.bitmap
-            val bitmapPath = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, bitmap,"some title", null);
-            val bitmapUri = Uri.parse(bitmapPath);
-            val shareIntent= Intent(Intent.ACTION_SEND);
-            shareIntent.type = "image/jpeg";
-            shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
-            startActivity(Intent.createChooser(shareIntent,"Share Image"));
+            val bitmapPath = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, bitmap,"some title", null)
+            val bitmapUri = Uri.parse(bitmapPath)
+            val shareIntent= Intent(Intent.ACTION_SEND)
+            shareIntent.type = "image/jpeg"
+            shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri)
+            startActivity(Intent.createChooser(shareIntent,"Share Image"))
         }
         return binding.root
     }

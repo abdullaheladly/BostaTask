@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mosta/StudioProjects/BostaTask/app/src/main/res/drawable/album_item_bg.xml" value="0.1675" />
         <entry key="..\:/Users/mosta/StudioProjects/BostaTask/app/src/main/res/layout/activity_main.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/mosta/StudioProjects/BostaTask/app/src/main/res/layout/albums_item_row.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/mosta/StudioProjects/BostaTask/app/src/main/res/layout/fragment_profile.xml" value="0.1" />

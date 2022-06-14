@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.bostatask.R
 import com.abdullah996.bostatask.databinding.FragmentProfileBinding
@@ -22,14 +23,14 @@ import kotlin.random.Random
 
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),OnAlbumsClickListeners {
 
     private var _binding:FragmentProfileBinding?=null
     private val binding get() = _binding!!
 
     private val profileViewModel:ProfileViewModel by viewModels()
     private var usersList= emptyList<UsersResponseItem>()
-    private val albumsAdapter by lazy { AlbumsAdapter() }
+    private val albumsAdapter by lazy { AlbumsAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -149,6 +150,11 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    override fun onAlbumItemClick(albumId: Int) {
+        val action=ProfileFragmentDirections.actionProfileFragmentToDetailsFragment(albumId)
+        findNavController().navigate(action)
     }
 
 

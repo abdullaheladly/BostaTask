@@ -10,7 +10,7 @@ import com.abdullah996.bostatask.databinding.AlbumsItemRowBinding
 import com.abdullah996.bostatask.model.albums.AlbumsResponseItem
 import com.abdullah996.bostatask.util.DiffUtilCallBack
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.MyViewHolder>(){
+class AlbumsAdapter(private val onAlbumsClickListeners: OnAlbumsClickListeners) : RecyclerView.Adapter<AlbumsAdapter.MyViewHolder>(){
     private var currenciesList= emptyList<AlbumsResponseItem>()
 
 
@@ -28,7 +28,11 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.MyViewHolder>(){
         with(holder){
             with(currenciesList[position]){
                 binding.albumName.text=this.title.toString()
+                binding.root.setOnClickListener {
+                    this.id?.let { it1 -> onAlbumsClickListeners.onAlbumItemClick(albumId = it1) }
+                }
             }
+
         }
 
     }
